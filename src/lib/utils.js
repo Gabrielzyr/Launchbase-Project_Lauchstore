@@ -17,6 +17,13 @@ module.exports = {
             birthDay: `${day}/${month}`,
             format: `${day}/${month}/${year}`
         }
+    },
+
+    formatPrice(price) {
+        return new Intl.NumberFormat('pt-BR', {
+            style: 'currency', //1,000.00
+            currency: "BRL"
+          }).format(price/100)
     }
 
 }

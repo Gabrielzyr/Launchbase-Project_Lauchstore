@@ -3,7 +3,7 @@
     <div>
         <select name="category_id">
             {% for category in categories %}
-                <option value="{{category.id}}" {% if product.category.id == category.id %}selected{% endif %}}>
+                <option value="{{category.id}}" {% if product.category_id == category.id %} selected {% endif %}>
                     {{category.name}}
                 </option>
             {% endfor %}
@@ -27,9 +27,7 @@
 <div class="item">
   <div>Descrição</div>
   <div>
-    <textarea name="description">
-      {{product.description}}
-    </textarea>
+    <textarea name="description">{{product.description}}</textarea>
   </div>
 </div>
 
@@ -42,7 +40,7 @@
     type="text" 
     name="price" 
     placeholder="Preço do Produto" 
-    value="{{ product.name }}"
+    value="{{ product.price }}"
     onKeydown="Mask.apply(this,'formatBRL')"
     >
   </div>
