@@ -84,12 +84,12 @@ module.exports = {
   search(params) {
     const { filter, category } = params
     
-    let query = ""
+    let query = "",
       filterQuery = `WHERE`
 
     if (category) {
       filterQuery = `${filterQuery}
-      products.category_id = ${category}
+      products.category_id = ${category} 
       AND`
     }
 
@@ -101,7 +101,7 @@ module.exports = {
 
     query = `
       SELECT products.*,
-        categories.name AS category_name
+      categories.name AS category_name
       FROM products
       LEFT JOIN categories ON (categories.id = products.category_id)
       ${filterQuery}
