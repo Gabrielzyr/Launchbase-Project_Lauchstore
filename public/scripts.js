@@ -5,7 +5,7 @@ const Mask = {
     }, 1)
 
   },
-
+  
   formatBRL(value) {
     value = value.replace(/\D/g, "")
 
