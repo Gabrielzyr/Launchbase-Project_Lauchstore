@@ -19,13 +19,12 @@ const UserController = require('../app/controllers/UserController')
 
 // // user register UserController
 
-// routes.get('/register', UserController.registerForm)
+routes.get('/register', UserController.registerForm)
 // routes.post('/register', UserController.post)
 
 // routes.get('/', UserController.show)
 // routes.put('/', UserController.put)
 // routes.delete('/', UserController.delete)
-
 
 
 module.exports = routes
