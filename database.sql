@@ -1,6 +1,11 @@
 DROP DATABASE IF EXISTS lauchstoredb
 CREATE DATABASE lauchstoredb
 
+--token password recovery
+ALTER TABLE "users" ADD COLUMN reset_token text;
+ALTER TABLE "users" ADD COLUMN reset_token_expires text;
+
+
 CREATE TABLE "products" (
   "id" SERIAL PRIMARY KEY,
   "category_id" int NOT NULL,

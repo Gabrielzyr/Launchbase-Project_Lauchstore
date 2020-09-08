@@ -1,4 +1,5 @@
 const db = require("../../config/db")
+const { create } = require("browser-sync")
 const { hash } = require('bcryptjs')
 const { update } = require("../controllers/UserController")
 
@@ -48,6 +49,7 @@ module.exports = {
 
       const results = await db.query(query, values)
       return results.rows[0].id
+      
     } catch (err) {
       console.error(err)
     }

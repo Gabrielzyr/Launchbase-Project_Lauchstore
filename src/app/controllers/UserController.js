@@ -1,3 +1,4 @@
+// const User = require('../models/User')
 const User = require('../models/User')
 const { formatCep, formatCpfCnpj } = require('../../lib/utils')
 
