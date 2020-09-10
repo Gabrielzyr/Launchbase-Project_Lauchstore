@@ -57,7 +57,7 @@ const Base = {
         // values : "Mark", "30", "Rua fernandes 312"
 
         keys.push(key)
-        values.push(fields[key])
+        values.push(`'${fields[key]}'`)
 
       })
 
@@ -70,12 +70,11 @@ const Base = {
       return results.rows[0].id
 
     } catch (error) {
-      console.error(err);
+      console.error(error);
 
     }
 
   },
-
 
   update(id, fields) {
 
