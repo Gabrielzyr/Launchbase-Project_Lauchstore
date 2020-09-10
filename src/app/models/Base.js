@@ -70,7 +70,7 @@ const Base = {
       return results.rows[0].id
 
     } catch (error) {
-      console.error(err);
+      console.error(error);
 
     }
 

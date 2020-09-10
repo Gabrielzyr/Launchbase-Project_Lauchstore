@@ -1,21 +1,20 @@
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const File = require('../models/File')
+const { unlinkSync } = require("fs")
+
 
 const { formatPrice, date } = require('../../lib/utils')
 
 module.exports = {
   async create(req, res) {
-
     try {
       const categories = await Category.findAll()
       return res.render("products/create", { categories })
 
     } catch (err) {
       console.error(err)
-
     }
-
   },
 
   async post(req, res) {
@@ -34,7 +33,8 @@ module.exports = {
         return res.send('Please, send at least one image');
       }
 
-      let { category_id, name, description, old_price, price, quantity, status } = req.body
+      let { category_id, name, description, old_price, price, 
+        quantity, status } = req.body
 
       price = price.replace(/\D/g, "")
 
@@ -50,7 +50,7 @@ module.exports = {
       })
 
       const filesPromise = req.files.map(file =>
-        File.create({ ...file, product_id }))
+        File.create({ name: file.name, path: file.path, product_id }))
       await Promise.all(filesPromise)
 
       return res.redirect(`products/${product_id}/edit`)
@@ -62,7 +62,6 @@ module.exports = {
   },
 
   async show(req, res) {
-
 
     try {
 
@@ -80,7 +79,7 @@ module.exports = {
       product.oldPrice = formatPrice(product.old_price)
       product.price = formatPrice(product.price)
 
-      const files = await Product.files(product.id)
+      let files = await Product.files(product.id)
       files = files.map(file => ({
         ...file,
         src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
@@ -180,7 +179,18 @@ module.exports = {
   },
 
   async delete(req, res) {
+    
+    const files = await Product.files(req.body.id)
+
     await Product.delete(req.body.id)
+
+    files.map(file => {
+      try {
+        unlinkSync(file.path)
+      } catch (err) {
+        console.error(err)
+      }
+    })
 
     return res.redirect('/products/create')
   }

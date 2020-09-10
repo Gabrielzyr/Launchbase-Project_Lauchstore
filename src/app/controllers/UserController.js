@@ -33,7 +33,7 @@ module.exports = {
 
     try {
 
-      let { name, email, cpf_cnpj, cep, address } = req.body
+      let { name, email, password, cpf_cnpj, cep, address } = req.body
 
       password = await hash(password, 8)
       cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
@@ -108,15 +108,14 @@ module.exports = {
       req.session.destroy()
 
       // remove all images from public folder
-      promiseResults.map(results => {
-        results.rows.map(file => {
+      promiseResults.map(files => {
+        files.map(file => {
           try {
             unlinkSync(file.path)
           } catch (err) {
             console.error(err)
           }
-        }
-        )
+        })
       })
 
       return res.render("session/login", {

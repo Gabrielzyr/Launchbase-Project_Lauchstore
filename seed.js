@@ -56,7 +56,7 @@ async function createProducts() {
   while(files.length < 50) {
     files.push({
       name: faker.image.image(),
-      path: `puclic/images/placeholder.png`,
+      path: `public/images/placeholder.png`,
       product_id: productsIds[Math.floor(Math.random() * totalProducts)],
     })
   }
