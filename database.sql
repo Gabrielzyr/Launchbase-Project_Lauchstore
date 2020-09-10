@@ -1,5 +1,18 @@
-DROP DATABASE IF EXISTS lauchstoredb
-CREATE DATABASE lauchstoredb
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
+DROP DATABASE IF EXISTS lauchstoredb;
+CREATE DATABASE lauchstoredb;
+
+--delete data to run seeds
+DELETE FROM products;
+DELETE FROM users;
+DELETE FROM files;
+
+--restart sequence auto_increment from tables ids
+ALTER SEQUENCE products_id_seq RESTART WITH 1;
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE files_id_seq RESTART WITH 1;
 
 --token password recovery
 ALTER TABLE "users" ADD COLUMN reset_token text;

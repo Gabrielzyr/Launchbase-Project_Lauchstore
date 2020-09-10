@@ -57,7 +57,7 @@ const Base = {
         // values : "Mark", "30", "Rua fernandes 312"
 
         keys.push(key)
-        values.push(fields[key])
+        values.push(`'${fields[key]}'`)
 
       })
 
@@ -75,7 +75,6 @@ const Base = {
     }
 
   },
-
 
   update(id, fields) {
 
